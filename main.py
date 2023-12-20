@@ -4,6 +4,8 @@ import discord
 from discord.ext import commands
 import random
 
+import os
+token = os.environ['DISCORD_TOKEN']
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
 
@@ -111,4 +113,4 @@ async def submit(ctx):
 
 
 
-bot.run("MTE4Njc0ODA4ODI2Njc5Mjk2MQ.G8HJ_Q.OIyjR4Tv7xV2335N5-U4ICe7ioRCFo2yxRriDo")
+bot.run(token)
