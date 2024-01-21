@@ -5,17 +5,24 @@ from discord.ext import commands
 import random
 
 import os
-token = os.environ['DISCORD_TOKEN']
+from dotenv import load_dotenv
+
+
+
+load_dotenv()
+token = os.environ.get('DISCORD_TOKEN')
+
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
 
 There are a number of utility commands being showcased here.'''
 
 intents = discord.Intents.default()
+intents.messages = True
+intents.guilds = True  # Enable the guilds intent if needed
 intents.members = True
-intents.message_content = True
-
-bot = commands.Bot(command_prefix='?', description=description, intents=intents)
+client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix='wirus ', description=description, intents=intents)
 
 
 @bot.event
@@ -63,8 +70,11 @@ async def joined(ctx, member: discord.Member):
 
 
 @bot.command()
-async def question(ctx, question_link: str):
+async def question(ctx, question_link: str = None):
     # Check if the command is used in the #general channel
+    if question_link is None:
+        await ctx.send('Please provide a question link.')
+        return
     if ctx.channel.name == 'general':
         # Notify everyone in the #questions channel
         channel = discord.utils.get(ctx.guild.channels, name='question')
