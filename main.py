@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 
 
-
+# hello
 load_dotenv()
 token = os.environ.get('DISCORD_TOKEN')
 
